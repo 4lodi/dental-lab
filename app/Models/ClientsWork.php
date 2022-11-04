@@ -11,6 +11,7 @@ use App\Models\MedicalEntity;
 use App\Models\MedicalCenter;
 use App\Models\Doctor;
 use App\Models\Status;
+use Carbon\Carbon;
 
 class ClientsWork extends Model
 {
@@ -23,17 +24,17 @@ class ClientsWork extends Model
         return  $this->belongsTo(Work::class, 'work_id', 'id');
     }
 
-    public function typeWorks()
+    public function typeworks()
     {
         return  $this->belongsTo(WorksPrice::class, 'type_work_id', 'id');
     }
 
-    public function medicalEntity()
+    public function medicalentity()
     {
         return  $this->belongsTo(MedicalEntity::class, 'medical_entity_id', 'id');
     }
 
-    public function medicalCenter()
+    public function medicalcenter()
     {
         return  $this->belongsTo(MedicalCenter::class, 'medical_center_id', 'id');
     }
@@ -46,5 +47,25 @@ class ClientsWork extends Model
     public function status()
     {
         return  $this->belongsTo(Status::class, 'status_id', 'id');
+    }
+
+    public function setStartWorkAttribute($value)
+    {
+        $this->attributes['start_work'] = $value ? Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d') : null;
+    }
+
+    public function getStartWorkAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d-m-Y') : null;
+    }
+
+    public function setFinishWorkAttribute($value)
+    {
+        $this->attributes['finish_work'] = $value ? Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d') : null;
+    }
+
+    public function getFinishWorkAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d-m-Y') : null;
     }
 }

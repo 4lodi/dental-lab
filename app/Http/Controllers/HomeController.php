@@ -2,83 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientsWork;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('system.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
     }
+
+    public function getDataClients(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $clientsWorks = ClientsWork::with('medicalcenter', 'doctor', 'typeworks', 'status')
+                ->select('clients_works.*');
+
+            return DataTables::of($clientsWorks)
+                ->addColumn('actions', 'actions.action')
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
+        return view('system.index');
+    }
 }
+
+
+//join('medical_centers', 'clients_works.medical_center_id', '=', 'medical_centers.id')
+//->select('clients_works.*', 'medical_centers.name AS medicalCenter')

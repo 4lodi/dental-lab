@@ -12,7 +12,6 @@ class MedicalCenter extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
-
     public function medicalCenters()
     {
         return  $this->hasMany(ClientsWork::class, 'medical_center_id');

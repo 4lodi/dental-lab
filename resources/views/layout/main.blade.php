@@ -164,6 +164,7 @@ Tip 2: you can also add an image using data-image tag
 			</div>
 		</div>
 	</div>
+	<script src="{{asset('js/jquery/jquery-3.6.1.min.js')}}"></script>
 	<script>
 		var notificaciones = document.querySelectorAll(".notis");
 		var totalNotificaciones = notificaciones.length;
@@ -171,9 +172,7 @@ Tip 2: you can also add an image using data-image tag
 		document.getElementById("countNotis").innerHTML = "" + totalNotificaciones;
 	</script>
 
-
-
-	<script src="{{asset('js/core/jquery.min.js')}}"></script>
+	
 	<script src="{{asset('js/core/popper.min.js')}}"></script>
 	<script src="{{asset('js/core/bootstrap-material-design.min.js')}}"></script>
 	<script src="{{asset('js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
@@ -357,7 +356,6 @@ Tip 2: you can also add an image using data-image tag
 			});
 		});
 	</script>
-
 	@yield('scripts')
 </body>
 

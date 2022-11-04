@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientsWork;
 use Illuminate\Http\Request;
 
 class ClientWorkController extends Controller
